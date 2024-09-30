@@ -9,7 +9,7 @@ fi
 PACKAGE_NAME=$1  # The name of the package (e.g., zsh, git)
 GLOB_PATTERN=$2  # The glob pattern to match files (e.g., *.zshrc)
 
-DOTFILES_DIR="$HOME/work/wooboo/dotfiles"  # Updated location for dotfiles
+DOTFILES_DIR="$HOME/dotfiles"  # Updated location for dotfiles
 PACKAGE_DIR="$DOTFILES_DIR/$PACKAGE_NAME"
 
 # Create the package directory inside the dotfiles directory
