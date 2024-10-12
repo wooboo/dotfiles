@@ -1,356 +1,194 @@
-/*
- * __        __          _                  ____  _         _       
- * \ \      / /_ _ _   _| |__   __ _ _ __  / ___|| |_ _   _| | ___  
- *  \ \ /\ / / _` | | | | '_ \ / _` | '__| \___ \| __| | | | |/ _ \ 
- *   \ V  V / (_| | |_| | |_) | (_| | |     ___) | |_| |_| | |  __/ 
- *    \_/\_/ \__,_|\__, |_.__/ \__,_|_|    |____/ \__|\__, |_|\___| 
- *                 |___/                              |___/         
- *  
- * by Stephan Raabe (2024) 
- * ----------------------------------------------------- 
-*/
-
-@define-color backgroundlight #FFFFFF;
-@define-color backgrounddark #FFFFFF;
-@define-color workspacesbackground1 #FFFFFF;
-@define-color workspacesbackground2 #CCCCCC;
-@define-color bordercolor #FFFFFF;
-@define-color textcolor1 #000000;
-@define-color textcolor2 #000000;
-@define-color textcolor3 #FFFFFF;
-@define-color iconcolor #FFFFFF;
-
-/* -----------------------------------------------------
- * General 
- * ----------------------------------------------------- */
-
 * {
-    font-family: "Fira Sans Semibold", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     border: none;
     border-radius: 0px;
+    font-family: "JetBrainsMono Nerd Font";
+    font-weight: bold;
+/*    font-size: 10px;*/
+    font-size: 14px;
+    min-height: 10px;
 }
+
+@import "theme.css";
 
 window#waybar {
-    background-color: rgba(0,0,0,0.2);
-    border-bottom: 0px solid #ffffff;
-    /* color: #FFFFFF; */
-    transition-property: background-color;
-    transition-duration: .5s;
+    background: transparent;
+/*    background: rgba(252, 250, 255, 0.5);*/
+/*    border-radius: 10px;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;*/
 }
 
-/* -----------------------------------------------------
- * Workspaces 
- * ----------------------------------------------------- */
+/*window#waybar > box {
+  box-shadow: 0px 4px 4px #2e3440;
+    background: @bar-bg;
+    border: 4px solid @border;
+    border-radius: 20px;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    margin: 10px 10px 0px 10px;
+}*/
 
-#workspaces {
-    margin: 5px 1px 6px 1px;
-    padding: 0px 1px;
-    border-radius: 15px;
-    border: 0px;
-    font-weight: bold;
-    font-style: normal;
-    font-size: 16px;
-    color: @textcolor1;
+tooltip {
+    background: @main-bg;
+    color: @main-fg;
+    border-radius: 7px;
+    border-width: 0px;
 }
 
 #workspaces button {
-    padding: 0px 5px;
-    margin: 4px 3px;
-    border-radius: 15px;
-    border: 0px;
-    color: @textcolor3;
-    transition: all 0.3s ease-in-out;
+    box-shadow: none;
+	text-shadow: none;
+    padding: 0px;
+    border-radius: 8px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 0px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-right: 0px;
+    color: @main-fg;
+    animation: ws_normal 20s ease-in-out 1;
 }
 
 #workspaces button.active {
-    color: @textcolor1;
-    background: @workspacesbackground2;
-    border-radius: 15px;
-    min-width: 40px;
-    transition: all 0.3s ease-in-out;
+    background: @wb-act-bg;
+    color: @wb-act-fg;
+    margin-left: 2px;
+    padding-left: 11px;
+    padding-right: 11px;
+    margin-right: 2px;
+    animation: ws_active 20s ease-in-out 1;
+    transition: all 0.4s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 #workspaces button:hover {
-    color: @textcolor1;
-    background: @workspacesbackground2;
-    border-radius: 15px;
-}
-
-/* -----------------------------------------------------
- * Tooltips
- * ----------------------------------------------------- */
-
-tooltip {
-    border-radius: 10px;
-    background-color: @backgroundlight;
-    opacity:0.8;
-    padding:20px;
-    margin:0px;
-}
-
-tooltip label {
-    color: @textcolor2;
-}
-
-/* -----------------------------------------------------
- * Window
- * ----------------------------------------------------- */
-
-#window {
-    background: @backgroundlight;
-    margin: 10px 15px 10px 0px;
-    padding: 2px 10px 0px 10px;
-    border-radius: 12px;
-    color:@textcolor2;
-    font-size:16px;
-    font-weight:normal;
-}
-
-window#waybar.empty #window {
-    background-color:transparent;
-}
-
-/* -----------------------------------------------------
- * Taskbar
- * ----------------------------------------------------- */
-
-#taskbar {
-    background: @backgroundlight;
-    margin: 6px 15px 6px 0px;
-    padding:0px;
-    border-radius: 15px;
-    font-weight: normal;
-    font-style: normal;
-    border: 3px solid @backgroundlight;
+    background: @wb-hvr-bg;
+    color: @wb-hvr-fg;
+    animation: ws_hover 20s ease-in-out 1;
+    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 #taskbar button {
-    margin:0;
-    border-radius: 15px;
-    padding: 0px 5px 0px 5px;
-}
-
-/* -----------------------------------------------------
- * Modules
- * ----------------------------------------------------- */
-
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
-/* -----------------------------------------------------
- * Custom Quicklinks
- * ----------------------------------------------------- */
-
-#custom-browser, 
-#custom-filemanager,
-#network,
-#pulseaudio,
-#battery,
-#custom-appmenu,
-#clock {
-    margin-right: 20px;
-    font-size: 20px;
-    font-weight: bold;
-    color: @iconcolor;
-    padding: 4px 10px 2px 10px;
-    font-size: 16px;
-}
-
-#custom-quicklink1,
-#custom-quicklink2,
-#custom-quicklink3,
-#custom-quicklink4,
-#custom-quicklink5,
-#custom-quicklink6,
-#custom-quicklink7,
-#custom-quicklink8,
-#custom-quicklink9,
-#custom-quicklink10 {
-    padding:0px;
-    margin-right: 7px;
-    font-size:20px;
-    color: @iconcolor;
-}
-
-/* -----------------------------------------------------
- * Custom Modules
- * ----------------------------------------------------- */
-
-#custom-appmenu {
-    background-color: @backgrounddark;
-    color: @textcolor1;
-    border-radius: 15px;
-    margin: 10px 10px 10px 10px;
-}
-
-/* -----------------------------------------------------
- * Custom Exit
- * ----------------------------------------------------- */
-
-#custom-exit {
-    margin: 2px 20px 0px 0px;
-    padding:0px;
-    font-size:20px;
-    color: @iconcolor;
-}
-
-/* -----------------------------------------------------
- * Hardware Group
- * ----------------------------------------------------- */
-
- #disk,#memory,#cpu,#language {
-    margin:0px;
-    padding:0px;
-    font-size:16px;
-    color:@iconcolor;
-}
-
-#language {
-    margin-right:10px;
-}
-
-/* -----------------------------------------------------
- * Clock
- * ----------------------------------------------------- */
-
-#clock {
-    background-color: @backgrounddark;
-    font-size: 16px;
-    color: @textcolor1;
-    border-radius: 15px;
-    margin: 10px 7px 10px 0px;
-}
-
-/* -----------------------------------------------------
- * Pulseaudio
- * ----------------------------------------------------- */
-
-#pulseaudio {
-    background-color: @backgroundlight;
-    font-size: 16px;
-    color: @textcolor2;
-    border-radius: 15px;
-    margin: 10px 10px 10px 0px;
-}
-
-#pulseaudio.muted {
-    background-color: @backgrounddark;
-    color: @textcolor1;
-}
-
-/* -----------------------------------------------------
- * Network
- * ----------------------------------------------------- */
-
-#network {
-    background-color: @backgroundlight;
-    font-size: 16px;
-    color: @textcolor2;
-    border-radius: 15px;
-    margin: 10px 10px 10px 0px;
-}
-
-#network.ethernet {
-    background-color: @backgroundlight;
-    color: @textcolor2;
-}
-
-#network.wifi {
-    background-color: @backgroundlight;
-    color: @textcolor2;
-}
-
-/* -----------------------------------------------------
- * Bluetooth
- * ----------------------------------------------------- */
-
- #bluetooth, #bluetooth.on, #bluetooth.connected {
-    background-color: @backgroundlight;
-    font-size: 16px;
-    color: @textcolor2;
-    border-radius: 15px;
-    margin: 10px 15px 10px 0px;
-}
-
-#bluetooth.off {
-    background-color: transparent;
+    box-shadow: none;
+	text-shadow: none;
     padding: 0px;
-    margin: 0px;
+    border-radius: 8px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 0px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-right: 0px;
+    color: @wb-color;
+    animation: tb_normal 20s ease-in-out 1;
 }
 
-/* -----------------------------------------------------
- * Battery
- * ----------------------------------------------------- */
-
-#battery {
-    background-color: @backgroundlight;
-    font-size: 16px;
-    color: @textcolor2;
-    border-radius: 15px;
-    margin: 10px 15px 10px 0px;
+#taskbar button.active {
+    background: @wb-act-bg;
+    color: @wb-act-color;
+    margin-left: 2px;
+    padding-left: 11px;
+    padding-right: 11px;
+    margin-right: 2px;
+    animation: tb_active 20s ease-in-out 1;
+    transition: all 0.4s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
-#battery.charging, #battery.plugged {
-    color: @textcolor2;
-    background-color: @backgroundlight;
+#taskbar button:hover {
+    background: @wb-hvr-bg;
+    color: @wb-hvr-color;
+    animation: tb_hover 20s ease-in-out 1;
+    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
-@keyframes blink {
-    to {
-        background-color: @backgroundlight;
-        color: @textcolor2;
-    }
+#tray menu * {
+    min-height: 16px
 }
 
-#battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: @textcolor3;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+#tray menu separator {
+    min-height: 10px
 }
 
-/* -----------------------------------------------------
- * Tray
- * ----------------------------------------------------- */
-
-#tray {
-    margin:0px 10px 0px 0px;
+#backlight,
+#battery,
+#bluetooth,
+#custom-cliphist,
+#clock,
+#custom-cpuinfo,
+#cpu,
+#custom-gpuinfo,
+#idle_inhibitor,
+#custom-keybindhint,
+#language,
+#memory,
+#mpris,
+#network,
+#custom-notifications,
+#custom-power,
+#privacy,
+#pulseaudio,
+#custom-spotify,
+#taskbar,
+#custom-theme,
+#tray,
+#custom-updates,
+#custom-wallchange,
+#custom-wbar,
+#window,
+#workspaces,
+#custom-l_end,
+#custom-r_end,
+#custom-sl_end,
+#custom-sr_end,
+#custom-rl_end,
+#custom-rr_end {
+    color: @main-fg;
+    background: @main-bg;
+    opacity: 1;
+/*    margin: 3px 0px 3px 0px;*/
+    margin: 12px 0px 0px 0px;
+/*    padding-left: 4px;
+    padding-right: 4px;*/
+    padding: 5px;
 }
 
-#tray > .passive {
-    -gtk-icon-effect: dim;
+#workspaces,
+#taskbar {
+    padding: 3px;
 }
 
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
+#custom-r_end {
+    border-radius: 0px 19px 19px 0px;
+    margin-right: 8px;
+    padding-right: 0px;
 }
 
-/* -----------------------------------------------------
- * Other
- * ----------------------------------------------------- */
-
-label:focus {
-    background-color: #000000;
+#custom-l_end {
+    border-radius: 19px 0px 0px 19px;
+    margin-left: 8px;
+    padding-left: 0px;
 }
 
-#backlight {
-    background-color: #90b1b1;
+#custom-sr_end {
+    border-radius: 0px;
+    margin-right: 8px;
+    padding-right: 0px;
 }
 
-#network {
-    background-color: #2980b9;
+#custom-sl_end {
+    border-radius: 0px;
+    margin-left: 8px;
+    padding-left: 0px;
 }
 
-#network.disconnected {
-    background-color: #f53c3c;
+#custom-rr_end {
+    border-radius: 0px 7px 7px 0px;
+    margin-right: 8px;
+    padding-right: 0px;
 }
 
+#custom-rl_end {
+    border-radius: 7px 0px 0px 7px;
+    margin-left: 8px;
+    padding-left: 0px;
+}

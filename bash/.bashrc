@@ -472,10 +472,10 @@ install_bashrc_support() {
 
 	case $dtype in
 		"redhat")
-			sudo yum install multitail tree zoxide trash-cli fzf bash-completion fastfetch
+			sudo yum install multitail tree zoxide trash-cli fzf bash-completion fastfetch fd
 			;;
 		"suse")
-			sudo zypper install multitail tree zoxide trash-cli fzf bash-completion fastfetch
+			sudo zypper install multitail tree zoxide trash-cli fzf bash-completion fastfetch fd
 			;;
 		"debian")
 			sudo apt-get install multitail tree zoxide trash-cli fzf bash-completion
@@ -486,10 +486,10 @@ install_bashrc_support() {
 			curl -sL $FASTFETCH_URL -o /tmp/fastfetch_latest_amd64.deb
 
 			# Install the downloaded deb file using apt-get
-			sudo apt-get install /tmp/fastfetch_latest_amd64.deb
+			sudo apt-get install /tmp/fastfetch_latest_amd64.deb fd
 			;;
 		"arch")
-			sudo paru multitail tree zoxide trash-cli fzf bash-completion fastfetch
+			sudo paru multitail tree zoxide trash-cli fzf bash-completion fastfetch fd
 			;;
 		"slackware")
 			echo "No install support for Slackware"
@@ -631,6 +631,22 @@ if [[ $- == *i* ]]; then
 fi
 
 export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bin:/.local/share/flatpak/exports/bin"
+# Use ~~ as the trigger sequence instead of the default **
+export FZF_COMPLETION_TRIGGER='~~'
+export FZF_DEFAULT_OPTS="--preview 'bat --color=always --line-range :1000 {}'"
+export FZF_DEFAULT_COMMAND="fd --type f"
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf "$@" --preview 'tree -C {} | head -200' ;;
+    *)            fzf "$@" ;;
+  esac
+}
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
+eval "$(fzf --bash)"
+eval "$(fnm env --use-on-cd --shell bash)"
+. "/home/wooboo/.deno/env"
