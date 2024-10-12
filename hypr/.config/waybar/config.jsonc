@@ -109,7 +109,7 @@
     },
 
     "clock": {
-        "format": "{:%I:%M %p}",
+        "format": "{:%R}",
         "rotate": 0,
         "format-alt": "{:%R 󰃭 %d·%m·%y}",
         "tooltip-format": "<span>{calendar}</span>",
