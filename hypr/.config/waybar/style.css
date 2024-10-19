@@ -4,7 +4,7 @@
     font-family: "JetBrainsMono Nerd Font";
     font-weight: bold;
 /*    font-size: 10px;*/
-    font-size: 14px;
+    font-size: 12px;
     min-height: 10px;
 }
 
@@ -145,7 +145,7 @@ tooltip {
     background: @main-bg;
     opacity: 1;
 /*    margin: 3px 0px 3px 0px;*/
-    margin: 12px 0px 0px 0px;
+    margin: 4px 0px 0px 0px;
 /*    padding-left: 4px;
     padding-right: 4px;*/
     padding: 5px;
