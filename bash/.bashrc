@@ -51,6 +51,9 @@ export XDG_CACHE_HOME="$HOME/.cache"
 # Seeing as other scripts will use it might as well export it
 export LINUXTOOLBOXDIR="$HOME/linuxtoolbox"
 
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+export OLLAMA_API_BASE=http://127.0.0.1:11434
+
 # Allow ctrl-S for history navigation (with ctrl-R)
 [[ $- == *i* ]] && stty -ixon
 
@@ -651,3 +654,7 @@ eval "$(zoxide init bash)"
 eval "$(fzf --bash)"
 eval "$(fnm env --use-on-cd --shell bash)"
 . "/home/wooboo/.deno/env"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH

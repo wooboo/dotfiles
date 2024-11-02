@@ -158,7 +158,7 @@
         "rotate": 0,
         "separate-outputs": true,
         "rewrite": {
-            "ysl@rog:(.*)": "$1 ",
+            "wooboo@ender:(.*)": "$1 ",
             "(.*) — Mozilla Firefox": "$1 󰈹",
             "(.*)Mozilla Firefox": "Firefox 󰈹",
             "(.*) - Visual Studio Code": "$1 󰨞",

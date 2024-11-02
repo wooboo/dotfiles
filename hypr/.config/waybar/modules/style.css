@@ -4,7 +4,7 @@
     font-family: "JetBrainsMono Nerd Font";
     font-weight: bold;
 /*    font-size: ${s_fontpx}px;*/
-    font-size: 14px;
+    font-size: 12px;
     min-height: 10px;
 }
 
@@ -120,7 +120,7 @@ ${modules_ls}
     background: @main-bg;
     opacity: 1;
 /*    margin: ${x1g_margin}px ${x2g_margin}px ${x3g_margin}px ${x4g_margin}px;*/
-    margin: 12px 0px 0px 0px;
+    margin: 4px 0px 4px 0px;
 /*    padding-${x3}: ${g_paddin}px;
     padding-${x4}: ${g_paddin}px;*/
     padding: 5px;
